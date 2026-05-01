@@ -447,7 +447,13 @@ function PremiumCaseStudy({ title, imageSrc, mockupBg, websiteUrl, stackIndex = 
       </div>
 
       <div className="case-visual" style={{ backgroundColor: mockupBg || '#f8fafc' }}>
-        <img src={imageSrc} alt={`${title} mockup`} className="case-img" />
+        <img 
+          src={imageSrc} 
+          alt={`${title} mockup`} 
+          className="case-img" 
+          loading="lazy" 
+          decoding="async" 
+        />
       </div>
     </article>
   )
