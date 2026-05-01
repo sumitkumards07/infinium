@@ -263,9 +263,8 @@ function ContactForm() {
       setIsLoading(true)
       
       try {
-        // Replace 'YOUR_FORMSPREE_ID' with your actual Formspree ID from formspree.io
-        // For now, it will simulate a successful send for your testing
-        const response = await fetch('https://formspree.io/f/xpwzpypj', {
+        // Using your live Formspree endpoint
+        const response = await fetch('https://formspree.io/f/xbdwjbya', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
