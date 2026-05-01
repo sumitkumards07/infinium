@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import type { CSSProperties } from 'react'
+import type { CSSProperties, MouseEvent } from 'react'
+import { motion, useMotionValue, useSpring } from 'framer-motion'
 import './App.css'
 import { Footer } from './Footer';
-import { PremiumContact } from './PremiumContact';
 
 const partnerMarks = [
   'Axis',
@@ -19,52 +19,45 @@ const partnerMarks = [
 
 const services = [
   {
-    title: 'SaaS Architecture',
-    body: 'Multi-tenant platforms, secure data models, analytics surfaces, and resilient cloud foundations.',
-    metric: '99.99%',
-    icon: 'architecture',
+    title: 'Web Development',
+    body: 'Custom websites and web apps built with React, Next.js, and modern frameworks.',
+    emoji: '🌐',
   },
   {
-    title: 'Cross-Platform Mobile Apps',
-    body: 'Production mobile systems with native-grade motion, offline states, and release discipline.',
-    metric: '2.4M',
-    icon: 'mobile',
+    title: 'Mobile Apps',
+    body: 'Cross-platform iOS & Android apps with native performance and beautiful UI.',
+    emoji: '📱',
   },
   {
-    title: 'AI & LLM Integration',
-    body: 'Private copilots, retrieval pipelines, agent workflows, and governed automation layers.',
-    metric: '12x',
-    icon: 'ai',
+    title: 'UI/UX Design',
+    body: 'User-centered design systems that convert visitors into loyal customers.',
+    emoji: '🎨',
   },
   {
-    title: 'Web Automation',
-    body: 'Browser orchestration, workflow intelligence, monitoring, and high-confidence operational tooling.',
-    metric: '84%',
-    icon: 'automation',
+    title: 'AI Integration',
+    body: 'Smart features powered by AI — chatbots, recommendations, and automation.',
+    emoji: '🤖',
+  },
+  {
+    title: 'E-Commerce',
+    body: 'High-conversion storefronts with seamless checkout and inventory management.',
+    emoji: '🛒',
+  },
+  {
+    title: 'Cloud & DevOps',
+    body: 'Scalable infrastructure, CI/CD pipelines, and 99.9% uptime guarantees.',
+    emoji: '☁️',
   },
 ]
 
-const projects = [
-  {
-    eyebrow: 'Enterprise Command Center',
-    title: 'A real-time operating layer for executive teams.',
-    stat: '18 regions synchronized',
-    type: 'laptop',
-  },
-  {
-    eyebrow: 'Mobile Intelligence Suite',
-    title: 'A field app built for speed, governance, and clean execution.',
-    stat: '420k actions monthly',
-    type: 'phone',
-  },
-]
+
 
 const pricingPlans = [
   {
     title: 'MVP Launchpad',
     description: 'Ideal for lean teams or startups needing clean, fast design delivery for websites or branding assets.',
     delivery: '4-6 weeks',
-    price: '$5,499+',
+    price: '$999+',
     features: [
       'Complete MVP development',
       'Full Stack Development',
@@ -81,7 +74,7 @@ const pricingPlans = [
     badge: 'Most Popular',
     description: 'For founders who want a usable, credible product — not a prototype.',
     delivery: '6-10 weeks',
-    price: '$9,950+',
+    price: '$2,999+',
     features: [
       'End-to-end MVP development',
       'Production-ready codebase',
@@ -98,7 +91,7 @@ const pricingPlans = [
     description: 'Built for teams scaling fast and shipping mission-critical products. A fully tailored design, development, and growth partnership — from strategy to deployment and beyond.',
     delivery: '12-16 weeks',
     priceLabel: 'Starting at',
-    price: '$15,499',
+    price: '$5,999',
     features: [
       'Dedicated product & engineering team',
       'Custom UX, design system & architecture',
@@ -114,46 +107,52 @@ const pricingPlans = [
 
 const testimonials = [
   {
-    quote: 'DreamLaunch took our vision and turned it into a production-ready product in 6 weeks. Their team is exceptional.',
+    quote: 'Infinium took our vision and turned it into a production-ready product in 6 weeks. Their team is exceptional.',
     author: 'Sarah Chen',
     role: 'Founder, TechFlow',
     company: 'Series A SaaS',
-    rating: 5
+    rating: 5,
+    highlight: false
   },
   {
-    quote: 'The level of professionalism and execution was unmatched. We launched with confidence and closed our first customers immediately.',
+    quote: 'The level of professionalism and execution was unmatched. We launched with confidence and closed our first customers immediately. Systems built with boardroom restraint and operator speed.',
     author: 'Michael Rodriguez',
     role: 'CEO, DataVault',
     company: 'Series B Enterprise',
-    rating: 5
+    rating: 5,
+    highlight: true
   },
   {
     quote: 'They understood our market better than we did. The design decisions alone saved us months of iteration with users.',
     author: 'Jessica Park',
     role: 'Co-founder, MobileSync',
     company: 'Seed Stage Mobile',
-    rating: 5
+    rating: 5,
+    highlight: false
   },
   {
     quote: 'Best investment we made in our startup journey. The post-launch support kept us running smoothly while we scaled.',
     author: 'David Thompson',
     role: 'Founder, CloudOps',
     company: 'Pre-seed Infrastructure',
-    rating: 5
+    rating: 5,
+    highlight: false
   },
   {
     quote: 'Non-technical founder here. They made the process painless and kept me educated every step of the way.',
     author: 'Amanda Brooks',
     role: 'Founder, FreshAI',
     company: 'AI Automation',
-    rating: 5
+    rating: 5,
+    highlight: false
   },
   {
     quote: 'Shipped faster than we thought possible. The codebase quality meant zero refactoring needed post-launch.',
     author: 'Alex Kumar',
     role: 'CTO, WebScale',
     company: 'Series A Platform',
-    rating: 5
+    rating: 5,
+    highlight: false
   }
 ]
 
@@ -182,7 +181,7 @@ const faqs = [
     answer: 'Absolutely! We specialize in helping non-technical founders. Our team of ex-Adobe, Amazon, and YC-backed professionals handles all technical aspects while keeping you informed every step of the way. We provide education throughout the process and ensure you understand your product\'s architecture and capabilities.'
   },
   {
-    question: 'What makes DreamLaunch different from other agencies?',
+    question: 'What makes Infinium different from other agencies?',
     answer: 'Our competitive advantages include: Expert team with Silicon Valley experience (ex-Adobe, Amazon, YC-backed), proven track record of 40+ successful MVP launches, global reach serving 6 continents, comprehensive end-to-end service, industry-leading 4-week delivery, and transparent pricing with no hidden costs. We focus on non-technical founders and provide education throughout the process.'
   },
   {
@@ -191,127 +190,28 @@ const faqs = [
   }
 ]
 
-function WireframeField() {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const context = canvas.getContext('2d')
-    if (!context) return
-
-    const pointer = { x: 0.5, y: 0.5 }
-    const particles = Array.from({ length: 150 }, (_, index) => ({
-      angle: index * 0.82,
-      orbit: 60 + (index % 15) * 35,
-      speed: 0.001 + (index % 7) * 0.0005,
-      offset: (index % 13) * 0.25,
-      zOffset: (Math.random() - 0.5) * 600,
-      color: [`#06b6d4`, `#14b8a6`, `#0d9488`, `#20c997`, `#06d6a0`][index % 5]
-    }))
-
-    let frame = 0
-    let animationId = 0
-    let width = 0
-    let height = 0
-
-    const resize = () => {
-      const ratio = Math.min(window.devicePixelRatio || 1, 2)
-      const rect = canvas.getBoundingClientRect()
-      width = rect.width
-      height = rect.height
-      canvas.width = Math.floor(width * ratio)
-      canvas.height = Math.floor(height * ratio)
-      context.setTransform(ratio, 0, 0, ratio, 0, 0)
-    }
-
-    const draw = () => {
-      frame += 1
-      context.clearRect(0, 0, width, height)
-
-      const centerX = width * 0.5
-      const centerY = height * 0.5
-      const mouseTiltX = (pointer.x - 0.5) * 200
-      const mouseTiltY = (pointer.y - 0.5) * 200
-
-      // Create a 3d perspective space
-      const focalLength = 400
-
-      const points = particles.map((particle) => {
-        const time = frame * particle.speed + particle.offset
-        
-        // 3D rotations
-        const x3d = Math.cos(particle.angle + time) * particle.orbit
-        const z3d = Math.sin(particle.angle + time) * particle.orbit + particle.zOffset
-        const y3d = Math.sin(particle.angle * 1.5 + time * 1.2) * particle.orbit * 0.6
-        
-        // Apply tilt based on mouse
-        const rotatedX = x3d * Math.cos(mouseTiltX * 0.005) - z3d * Math.sin(mouseTiltX * 0.005)
-        const rotatedZ = z3d * Math.cos(mouseTiltX * 0.005) + x3d * Math.sin(mouseTiltX * 0.005) + 300
-        
-        const rotatedY = y3d * Math.cos(mouseTiltY * 0.005) - rotatedZ * Math.sin(mouseTiltY * 0.005)
-        const finalZ = rotatedZ * Math.cos(mouseTiltY * 0.005) + y3d * Math.sin(mouseTiltY * 0.005)
-
-        // Projection
-        const scale = focalLength / (focalLength + finalZ)
-        const x = centerX + rotatedX * scale
-        const y = centerY + rotatedY * scale
-
-        return { x, y, scale, finalZ, color: particle.color }
-      })
-
-      // Sort by Z for proper 3D rendering (painters algorithm)
-      points.sort((a, b) => b.finalZ - a.finalZ)
-
-      context.lineWidth = 1.5
-      points.forEach((point, index) => {
-        for (let nextIndex = index + 1; nextIndex < Math.min(index + 20, points.length); nextIndex += 1) {
-          const next = points[nextIndex]
-          const distance = Math.hypot(point.x - next.x, point.y - next.y)
-          if (distance < 90 * point.scale) {
-            const opacity = (1 - distance / (90 * point.scale)) * 0.3 * Math.min(point.scale, 1.5)
-            context.strokeStyle = `rgba(150, 150, 150, ${opacity})`
-            context.beginPath()
-            context.moveTo(point.x, point.y)
-            context.lineTo(next.x, next.y)
-            context.stroke()
-          }
-        }
-      })
-
-      points.forEach((point) => {
-        const radius = Math.max(0.5, 3 * point.scale)
-        // Convert hex to rgb for opacity control or just use a solid color if scale is enough to convey depth
-        context.fillStyle = point.color
-        context.globalAlpha = Math.min(1, Math.max(0.1, point.scale))
-        context.beginPath()
-        context.arc(point.x, point.y, radius, 0, Math.PI * 2)
-        context.fill()
-      })
-      context.globalAlpha = 1
-
-      animationId = window.requestAnimationFrame(draw)
-    }
-
-    const updatePointer = (event: PointerEvent) => {
-      pointer.x = event.clientX / window.innerWidth
-      pointer.y = event.clientY / window.innerHeight
-    }
-
-    resize()
-    draw()
-    window.addEventListener('resize', resize)
-    window.addEventListener('pointermove', updatePointer)
-
-    return () => {
-      window.cancelAnimationFrame(animationId)
-      window.removeEventListener('resize', resize)
-      window.removeEventListener('pointermove', updatePointer)
-    }
-  }, [])
-
-  return <canvas ref={canvasRef} className="wireframe-canvas" aria-hidden="true" />
+function BeamsAndGrid() {
+  return (
+    <div className="beams-grid-bg" aria-hidden="true">
+      {/* Rotated CSS Grid Pattern */}
+      <div className="hero-grid-pattern"></div>
+      
+      {/* Animated Light Beams */}
+      <div className="beam beam-1"></div>
+      <div className="beam beam-2"></div>
+      <div className="beam beam-3"></div>
+      <div className="beam beam-4"></div>
+      <div className="beam beam-5"></div>
+      <div className="beam beam-6"></div>
+      <div className="beam beam-7"></div>
+      <div className="beam beam-8"></div>
+      
+      {/* Particle Burst Points */}
+      <div className="beam-particle-burst burst-1"></div>
+      <div className="beam-particle-burst burst-2"></div>
+      <div className="beam-particle-burst burst-3"></div>
+    </div>
+  );
 }
 
 function useRevealOnView() {
@@ -345,56 +245,14 @@ function useRevealOnView() {
   );
 }
 
-function DeviceMockup({ type }: { type: string }) {
-  const isPhone = type === 'phone'
 
-  return (
-    <div className={isPhone ? 'device phone-device' : 'device laptop-device'}>
-      <div className="device-bar">
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="mock-interface">
-        <div className="interface-sidebar">
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="interface-main">
-          <div className="interface-header">
-            <span />
-            <span />
-          </div>
-          <div className="interface-panels">
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="interface-chart">
-            <i />
-            <i />
-            <i />
-            <i />
-            <i />
-          </div>
-          <div className="interface-table">
-            <span />
-            <span />
-            <span />
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 function ContactForm() {
-  const [formData, setFormData] = useState({ name: '', email: '' })
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [isloading, setIsLoading] = useState(false)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
   }
@@ -402,58 +260,61 @@ function ContactForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (formData.name && formData.email) {
-      setSubmitted(true)
-      setFormData({ name: '', email: '' })
-      setTimeout(() => setSubmitted(false), 3000)
+      setIsLoading(true)
+      // Simulate API call
+      setTimeout(() => {
+        setIsLoading(false)
+        setSubmitted(true)
+        setFormData({ name: '', email: '', message: '' })
+        setTimeout(() => setSubmitted(false), 4000)
+      }, 800)
     }
   }
 
   return (
     <section className="contact-section reveal-on-view" id="contact-form" aria-labelledby="contact-title">
-      <div className="contact-wrapper">
+      <div className="contact-grid">
         <div className="contact-header">
-          <p className="eyebrow">Let's Connect</p>
+          <p className="eyebrow">Contact Us</p>
           <h2 id="contact-title">Got a project in mind?</h2>
-          <p className="contact-subtitle">Let's make something happen together</p>
+          <p className="contact-subtitle">Let's make something happen together.</p>
+          
+          <div className="contact-direct">
+            <a href="mailto:sumitkumards07@gmail.com" className="contact-link">
+              <span className="icon">📧</span> sumitkumards07@gmail.com
+            </a>
+            <a href="https://wa.me/918950013181" target="_blank" rel="noopener noreferrer" className="contact-link">
+              <span className="icon">💬</span> WhatsApp: +91 8950013181
+            </a>
+          </div>
         </div>
 
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Your Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Enter your Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
+        <div className="contact-form-wrapper">
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <div className="floating-group">
+              <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required placeholder=" " />
+              <label htmlFor="name">Your Name</label>
+            </div>
+            
+            <div className="floating-group">
+              <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required placeholder=" " />
+              <label htmlFor="email">Work Email</label>
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="email">Your Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Enter the Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
+            <div className="floating-group">
+              <textarea id="message" name="message" value={formData.message} onChange={handleChange} required placeholder=" " rows={3} />
+              <label htmlFor="message">Project Details</label>
+            </div>
 
-          <button type="submit" className="primary-action btn-full">
-            {submitted ? 'Message Sent!' : 'Get in Touch'}
-          </button>
-        </form>
-
-        {submitted && (
-          <div className="success-message">
-            Thanks for reaching out! We'll get back to you soon.
-          </div>
-        )}
+            {submitted ? (
+              <div className="success-message">Message Sent!</div>
+            ) : (
+              <button type="submit" className="submit-btn">
+                Submit Request <span className="arrow">→</span>
+              </button>
+            )}
+          </form>
+        </div>
       </div>
     </section>
   )
@@ -532,15 +393,287 @@ function FAQAccordion() {
   )
 }
 
+type CaseStudyProps = {
+  theme: 'dark' | 'light';
+  title: string;
+  subtitle: string;
+  imageSrc: string;
+  mockupBg?: string;
+  mission: string;
+  result: string;
+  features: { icon: string; title: string; desc: string }[];
+  techArchitecture: { title: string; desc: string }[];
+  ctaText: string;
+  websiteUrl: string;
+  stackIndex?: number;
+  totalCards?: number;
+};
+
+function PremiumCaseStudy({ title, imageSrc, mockupBg, websiteUrl, stackIndex = 0, totalCards = 1 }: CaseStudyProps) {
+  const stickyTop = 80 + stackIndex * 50;
+  const scaleOffset = 1 - (totalCards - 1 - stackIndex) * 0.02;
+  return (
+    <article
+      className="case-study-card reveal-on-view"
+      style={{
+        '--stack-index': stackIndex,
+        '--sticky-top': `${stickyTop}px`,
+        '--scale-offset': scaleOffset,
+      } as CSSProperties}
+    >
+      <div className="case-info">
+        <div className="case-info-left">
+          <h3 className="case-title">{title}</h3>
+        </div>
+        <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="case-view-link">
+          View Project <span className="arrow-icon">→</span>
+        </a>
+      </div>
+
+      <div className="case-visual" style={{ backgroundColor: mockupBg || '#f8fafc' }}>
+        <img src={imageSrc} alt={`${title} mockup`} className="case-img" />
+      </div>
+    </article>
+  )
+}
+
+const caseStudiesData: CaseStudyProps[] = [
+  {
+    theme: 'light',
+    title: 'CodeBattle — Gamified Learning',
+    subtitle: 'A Gamified Learning Management System (LMS) and interactive coding platform.',
+    imageSrc: '/codebattle_mockup.png?v=2',
+    mockupBg: '#050505',
+    mission: 'Traditional coding education often struggles with retention. The objective for CodeBattle was to transform the learning experience from passive reading into an active, story-driven bootcamp.',
+    result: "An interactive platform where users earn XP, unlock achievements, and level up their skills across 10+ technologies, featuring a live 'Global Players' ecosystem and instant code validation.",
+    features: [
+      { icon: '⚡', title: 'Instant Code Validation', desc: 'Write code, run it instantly, and receive real-time feedback within the browser.' },
+      { icon: '🎮', title: 'Gamified Architecture', desc: 'Custom XP system, unlockable labs (like Python Core and SQL Lab), and live tournament countdowns.' },
+      { icon: '🎯', title: 'Story-Driven Curriculum', desc: 'Coding challenges framed as "tactical missions" (e.g., "Repair Python Core") for elevated UX.' }
+    ],
+    techArchitecture: [
+      { title: 'Frontend & UI/UX', desc: 'React, Vite, Framer Motion, TailwindCSS for a responsive, dark-theme UI with glassmorphism.' },
+      { title: 'Backend & Execution', desc: 'Secure sandboxed execution environments (Python, Java, JS, SQL) and real-time WebSockets tracking 85,000+ global players.' }
+    ],
+    ctaText: "Ready to build an engaging, high-performance platform for your users? Let's talk.",
+    websiteUrl: 'https://www.codebattle.space/'
+  },
+  {
+    theme: 'light',
+    title: 'MoveTaxi — Taxi Booking',
+    subtitle: 'A high-performance, real-time transportation booking engine designed for speed and reliability.',
+    imageSrc: '/movetaxi_mockup.png',
+    mockupBg: '#f8fafc',
+    mission: 'Modern transport solutions demand more than just a search bar; they require intelligent matching and real-time responsiveness. The goal for MoveTaxi was to create a booking architecture that removes the complexity of logistics for the end user.',
+    result: 'A streamlined booking ecosystem that prioritizes sub-second load times and an intuitive, mobile-first interface, ensuring a seamless transition from search to dispatch.',
+    features: [
+      { icon: '📍', title: 'Smart Location Intelligence', desc: 'Highlight how the platform handles location selection efficiently, reducing user effort.' },
+      { icon: '✨', title: 'Transparent Flow', desc: 'Provides immediate visual confirmation for every step of the journey, building trust through clarity.' },
+      { icon: '📱', title: 'Responsive Design', desc: 'Optimized for both desktop and mobile, ensuring a consistent, high-end experience regardless of the device.' }
+    ],
+    techArchitecture: [
+      { title: 'Real-time Optimization', desc: 'Fast, reactive frameworks handle rapid state updates as users move through the booking process.' },
+      { title: 'Integration Capabilities', desc: 'Seamlessly connects modern APIs (third-party maps, payment gateways) into a cohesive, stable system.' },
+      { title: 'Performance Metrics', desc: 'Optimized for core web vitals, showcasing speed and SEO as fundamental features.' }
+    ],
+    ctaText: 'Transforming user intent into seamless conversions. Ready to build a high-conversion booking platform?',
+    websiteUrl: 'https://movetaxibooking.vercel.app/'
+  },
+  {
+    theme: 'light',
+    title: 'AssignFlow — Task Automation',
+    subtitle: 'A sleek project management and task assignment web application designed for enterprise agility.',
+    imageSrc: '/assignflow_mockup.png?v=2',
+    mockupBg: '#000000',
+    mission: 'Teams are overwhelmed by scattered communication and disorganized task boards. AssignFlow was designed to unify team collaboration into a single, high-efficiency command center.',
+    result: 'A robust, real-time project management dashboard that accelerates workflow delegation and tracking, increasing team velocity and transparency.',
+    features: [
+      { icon: '📊', title: 'Dynamic Kanban Boards', desc: 'Fluid drag-and-drop task management with automated status synchronization across the organization.' },
+      { icon: '👥', title: 'Team Workload Analytics', desc: 'Real-time visualization of resource distribution to prevent burnout and ensure optimal delivery.' },
+      { icon: '🔔', title: 'Smart Notifications', desc: 'Context-aware alerts that keep stakeholders informed without notification fatigue.' }
+    ],
+    techArchitecture: [
+      { title: 'Frontend Architecture', desc: 'State-driven React components optimized for rendering large datasets without layout thrashing.' },
+      { title: 'Backend & Data', desc: 'Real-time data synchronization ensuring multi-user collaboration happens with zero latency.' }
+    ],
+    ctaText: 'Empower your teams with custom-tailored productivity tools. Let’s streamline your operations.',
+    websiteUrl: 'https://assignflowapp.vercel.app/'
+  },
+  {
+    theme: 'light',
+    title: 'Aashna Herbals — E-commerce',
+    subtitle: 'A premium e-commerce experience merging traditional herbal authenticity with a high-conversion storefront.',
+    imageSrc: '/aashna_mockup.png',
+    mockupBg: '#e6e3dd',
+    mission: 'In the saturated wellness market, Aashna Herbals needed a digital presence that communicated purity and transparency while driving seamless conversions. The challenge was balancing rich storytelling with an optimized e-commerce funnel.',
+    result: 'A fast, immersive digital storefront that elevates the product line, using minimalist design to let natural ingredients take center stage, resulting in a frictionless path to checkout.',
+    features: [
+      { icon: '🌿', title: 'Immersive Product Showcase', desc: 'High-quality imagery and clear ingredient typography following top human interface guidelines.' },
+      { icon: '🛍️', title: 'Frictionless Checkout Flow', desc: 'An optimized shopping cart and checkout UI engineered to remove friction and reduce abandonment.' },
+      { icon: '📱', title: 'Mobile-First Commerce', desc: 'Meticulously optimized for thumbs, ensuring the mobile purchasing journey is just as premium as desktop.' }
+    ],
+    techArchitecture: [
+      { title: 'High-Speed Delivery', desc: 'Deployed on edge networks (like Vercel) to ensure lightning-fast page loads for online shoppers.' },
+      { title: 'Dynamic Asset Management', desc: 'Optimized image loading and headless CMS features to seamlessly manage the product catalog.' }
+    ],
+    ctaText: "Ready to elevate your brand's digital storefront and drive conversions? Let’s design your next chapter.",
+    websiteUrl: 'https://aashnaherbals.vercel.app/'
+  },
+  {
+    theme: 'light',
+    title: 'FoodFinder — Food Delivery',
+    subtitle: 'A high-performance, multi-sided marketplace connecting hungry users with local restaurants and real-time delivery fleets.',
+    imageSrc: '/food_mockup.png',
+    mockupBg: '#121212',
+    mission: 'Building a food delivery platform requires balancing hungry customers, restaurant management, and driver routing. The challenge was orchestrating this real-time data while keeping the interface completely stress-free.',
+    result: 'A seamless, cross-platform mobile ecosystem that turns complex geolocational data into a fluid, mouth-watering browsing and ordering experience.',
+    features: [
+      { icon: '🍔', title: 'Appetite-Driven UI', desc: 'Structured around high-quality food photography and intuitive categorization for flawless touch targets.' },
+      { icon: '🛒', title: 'Frictionless Cart', desc: 'Easily customize orders (add-ons, special instructions) and process multi-step checkouts without fatigue.' },
+      { icon: '🗺️', title: 'Live Order Telemetry', desc: 'Visual map integration where users can watch their delivery move in real-time, reducing customer anxiety.' }
+    ],
+    techArchitecture: [
+      { title: 'Cross-Platform Mobile', desc: 'Built with unified frameworks to deliver a native-feeling, fluid experience across both iOS and Android.' },
+      { title: 'Real-Time Data Sync', desc: 'Utilizes websockets to keep the restaurant, driver, and user perfectly synced during the delivery lifecycle.' },
+      { title: 'Geolocation & Routing', desc: 'Advanced map API integrations and location services demonstrating robust backend routing capabilities.' }
+    ],
+    ctaText: "Building complex, multi-sided marketplaces that feel effortless. Let's engineer your next digital ecosystem.",
+    websiteUrl: '#contact'
+  }
+];
+
+function MagneticButton({ children, href, className }: { children: React.ReactNode; href: string; className: string }) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springConfig = { damping: 15, stiffness: 150, mass: 0.1 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
+
+  const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    x.set((e.clientX - centerX) * 0.3);
+    y.set((e.clientY - centerY) * 0.3);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.a
+      ref={ref}
+      href={href}
+      className={className}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ x: springX, y: springY }}
+    >
+      {children}
+    </motion.a>
+  );
+}
+
+function InfiniumLegacyHero() {
+  return (
+    <div className="legacy-hero-content">
+      {/* Background Subtle Glow for Depth */}
+      <div className="legacy-glow pointer-events-none"></div>
+
+      {/* Eyebrow: Establishes immediate authority */}
+      <motion.div 
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="legacy-eyebrow"
+      >
+        <div className="line"></div>
+        <span>Established Excellence</span>
+        <div className="line"></div>
+      </motion.div>
+
+      {/* Main Headline: Mixing Sans-Serif with Serif for "Legacy" feel */}
+      <motion.h1 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="legacy-headline"
+      >
+        Engineering your digital <br className="desktop-break"/>
+        <span className="serif-italic">legacy.</span>
+      </motion.h1>
+
+      {/* Subheadline: Clear value proposition */}
+      <motion.p 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        className="legacy-subheadline"
+      >
+        Infinium is the trusted technical partner for visionary founders. We architect scalable, high-performance platforms designed to dominate markets and outlast the competition.
+      </motion.p>
+
+      {/* High-Conversion CTA Area */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.8 }}
+        className="legacy-actions"
+      >
+        <MagneticButton className="legacy-btn" href="#pricing">
+          <span className="btn-text">View Plans</span>
+          <div className="btn-hover-fill"></div>
+        </MagneticButton>
+        
+        {/* Micro-copy to reduce friction and build trust */}
+        <div className="legacy-micro-copy">
+          <div className="availability">
+            <span className="pulse-dot"></span>
+            <span>Accepting New Projects</span>
+          </div>
+          <span className="transparency-note">Transparent pricing. No hidden fees.</span>
+        </div>
+      </motion.div>
+
+      {/* Social Proof / Trust Bar */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.2 }}
+        className="legacy-trust-bar"
+      >
+        <div className="trust-avatars-row">
+          <div className="avatar-stack">
+            <img src="https://i.pravatar.cc/80?u=founder1" alt="Founder" className="stack-avatar" />
+            <img src="https://i.pravatar.cc/80?u=founder2" alt="Founder" className="stack-avatar" />
+            <img src="https://i.pravatar.cc/80?u=founder3" alt="Founder" className="stack-avatar" />
+            <img src="https://i.pravatar.cc/80?u=founder4" alt="Founder" className="stack-avatar" />
+            <img src="https://i.pravatar.cc/80?u=founder5" alt="Founder" className="stack-avatar" />
+          </div>
+          <div className="trust-copy">
+            <strong>Trusted by 50+ teams</strong>
+            <span>from seed to Series B</span>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 function App() {
   useRevealOnView()
   return (
     <main className="site-shell">
       <section className="hero-section" id="top" aria-labelledby="hero-title">
         <nav className="navbar" aria-label="Primary navigation">
-          <a className="brand" href="#top" aria-label="Apex Systems home">
+          <a className="brand" href="#top" aria-label="Infinium home">
             <span className="brand-mark" />
-            Apex Systems
+            Infinium
           </a>
           <div className="nav-links">
             <a href="#services">Services</a>
@@ -548,53 +681,23 @@ function App() {
             <a href="#about">About</a>
             <a href="#contact">Legal</a>
           </div>
-          <a className="nav-cta" href="#contact">Engage</a>
+          <a className="nav-cta" href="https://wa.me/918950013181" target="_blank" rel="noopener noreferrer">Book a Call</a>
         </nav>
 
-        <WireframeField />
+        <BeamsAndGrid />
 
-        <div className="hero-content">
-          <p className="eyebrow">Enterprise technology agency</p>
-          <h1 id="hero-title" aria-label="We Engineer Digital Dominance.">
-            {['We', 'Engineer', 'Digital', 'Dominance.'].map((word, index) => (
-              <span
-                className="headline-word"
-                key={word}
-                style={{ '--word-delay': `${index * 0.12}s` } as CSSProperties}
-              >
-                {word}
-              </span>
-            ))}
-          </h1>
-          <p className="hero-copy">
-            We design, build, and automate the systems ambitious companies rely on when
-            quality, speed, and institutional trust all matter at once.
-          </p>
-          <div className="hero-actions">
-            <a className="primary-action" href="#contact">Start the mandate</a>
-            <a className="secondary-action" href="#work">View case studies</a>
-          </div>
-        </div>
+        <InfiniumLegacyHero />
       </section>
 
       <section className="logo-cloud reveal-on-view" aria-labelledby="logo-cloud-title">
         <div className="logo-cloud-header">
           <p className="eyebrow">Trusted operating network</p>
-          <h2 id="logo-cloud-title">Logo Cloud Marquee</h2>
         </div>
         <div className="logo-marquee" aria-label="Partner brands">
           <div className="marquee-row">
-            {[...partnerMarks, ...partnerMarks].map((mark, index) => (
+            {[...partnerMarks, ...partnerMarks, ...partnerMarks, ...partnerMarks].map((mark, index) => (
               <span className="partner-logo" key={`${mark}-top-${index}`}>
                 <i className={`mark-shape shape-${(index % 5) + 1}`} aria-hidden="true" />
-                {mark}
-              </span>
-            ))}
-          </div>
-          <div className="marquee-row marquee-row-reverse">
-            {[...partnerMarks].reverse().concat([...partnerMarks].reverse()).map((mark, index) => (
-              <span className="partner-logo compact-logo" key={`${mark}-bottom-${index}`}>
-                <i className={`mark-shape shape-${((index + 2) % 5) + 1}`} aria-hidden="true" />
                 {mark}
               </span>
             ))}
@@ -604,21 +707,17 @@ function App() {
 
       <section className="services-section" id="services" aria-labelledby="services-title">
         <div className="section-heading">
-          <p className="eyebrow">The tech arsenal</p>
-          <h2 id="services-title">Systems built with boardroom restraint and operator speed.</h2>
+          <p className="eyebrow">What We Do</p>
+          <h2 id="services-title">Services that drive real results.</h2>
         </div>
         <div className="service-grid">
           {services.map((service, index) => (
             <article
-              className={`service-card service-${index + 1} reveal-on-view`}
+              className="service-card reveal-on-view"
               key={service.title}
-              style={{ '--card-delay': `${index * 0.11}s` } as CSSProperties}
+              style={{ '--card-delay': `${index * 0.1}s` } as CSSProperties}
             >
-              <div className={`service-icon ${service.icon}`} aria-hidden="true">
-                <span />
-                <span />
-              </div>
-              <p className="service-metric">{service.metric}</p>
+              <span className="service-emoji">{service.emoji}</span>
               <h3>{service.title}</h3>
               <p>{service.body}</p>
             </article>
@@ -628,22 +727,13 @@ function App() {
 
       <section className="work-section" id="work" aria-labelledby="work-title">
         <div className="section-heading">
-          <p className="eyebrow">Engineered for scale</p>
-          <h2 id="work-title">Calm interfaces for serious operating environments.</h2>
+          <p className="eyebrow">Our Portfolio</p>
+          <h2 id="work-title">Featured Work</h2>
         </div>
 
         <div className="project-stack">
-          {projects.map((project, index) => (
-            <article className={`project-card project-${index + 1}`} key={project.title}>
-              <div className="project-copy">
-                <p>{project.eyebrow}</p>
-                <h3>{project.title}</h3>
-                <span>{project.stat}</span>
-              </div>
-              <div className="device-wrap">
-                <DeviceMockup type={project.type} />
-              </div>
-            </article>
+          {caseStudiesData.map((caseStudy, index) => (
+            <PremiumCaseStudy key={index} {...caseStudy} stackIndex={index} totalCards={caseStudiesData.length} />
           ))}
         </div>
       </section>
@@ -687,7 +777,7 @@ function App() {
                 ))}
               </ul>
 
-              <a href="#contact" className={plan.popular ? 'primary-action btn-full' : 'secondary-action btn-full'}>
+              <a href="https://wa.me/918950013181" target="_blank" rel="noopener noreferrer" className={plan.popular ? 'primary-action btn-full' : 'secondary-action btn-full'}>
                 Book a call
               </a>
             </div>
@@ -713,17 +803,23 @@ function App() {
 
           <div className="testimonials-grid">
             {testimonials.map((testimonial, index) => (
-              <div className="testimonial-card reveal-on-view" key={`${testimonial.author}-${index}`} style={{ '--card-delay': `${index * 0.08}s` } as CSSProperties}>
-                <div className="testimonial-rating">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <span key={i} className="star">★</span>
-                  ))}
+              <div className={`testimonial-card reveal-on-view ${testimonial.highlight ? 'highlight' : ''}`} key={`${testimonial.author}-${index}`} style={{ '--card-delay': `${index * 0.08}s` } as CSSProperties}>
+                <div className="testimonial-header">
+                  <div className="testimonial-logo">{testimonial.company.substring(0, 2).toUpperCase()}</div>
+                  <div className="testimonial-rating">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <span key={i} className="star">★</span>
+                    ))}
+                  </div>
                 </div>
                 <p className="testimonial-quote">"{testimonial.quote}"</p>
                 <div className="testimonial-author">
-                  <strong>{testimonial.author}</strong>
-                  <span>{testimonial.role}</span>
-                  <small>{testimonial.company}</small>
+                  <img src={`https://i.pravatar.cc/150?u=${testimonial.author.replace(' ', '')}`} alt={testimonial.author} className="author-avatar" />
+                  <div className="author-info">
+                    <strong>{testimonial.author}</strong>
+                    <span>{testimonial.role}</span>
+                    <small>{testimonial.company}</small>
+                  </div>
                 </div>
               </div>
             ))}
@@ -734,42 +830,50 @@ function App() {
       <FAQAccordion />
 
       <ContactForm />
-      <PremiumContact />
 
       <footer className="site-footer" id="contact">
         <div className="footer-cta">
-          <p>Available for enterprise builds</p>
+          <p>Ready to innovate?</p>
           <h2>INFINIUM</h2>
         </div>
         <div className="footer-grid">
           <div>
-            <h3>Services</h3>
-            <a href="#services">SaaS Architecture</a>
-            <a href="#services">Mobile Apps</a>
-            <a href="#services">AI Integration</a>
+            <h3>Solutions</h3>
+            <a href="#services">Web Systems</a>
+            <a href="#services">Mobile Platforms</a>
+            <a href="#services">AI Automation</a>
+            <a href="#services">Cloud Strategy</a>
           </div>
           <div>
-            <h3>Work</h3>
+            <h3>Expertise</h3>
             <a href="#work">Case Studies</a>
-            <a href="#work">Dashboards</a>
-            <a href="#work">Automation</a>
-          </div>
-          <div id="about">
-            <h3>About</h3>
-            <a href="#top">Company</a>
-            <a href="#top">Standards</a>
-            <a href="#top">Security</a>
+            <a href="#work">Product Design</a>
+            <a href="#work">Engineering</a>
+            <a href="#pricing">Institutional Plans</a>
           </div>
           <div>
-            <h3>Legal</h3>
-            <a href="#contact">Terms of Service</a>
-            <a href="#contact">Privacy Notice</a>
-            <a href="#contact">Compliance</a>
+            <h3>Infinium</h3>
+            <a href="#top">Our Mission</a>
+            <a href="#top">Standard Operating Procedures</a>
+            <a href="#top">Security Protocols</a>
+            <a href="#top">The Team</a>
+          </div>
+          <div>
+            <h3>Engage</h3>
+            <a href="#contact-form">Start a Project</a>
+            <a href="mailto:sumitkumards07@gmail.com">Direct Email</a>
+            <a href="https://wa.me/918950013181" target="_blank" rel="noopener noreferrer">WhatsApp Chat</a>
+            <a href="https://www.linkedin.com/in/sumit-kumar-9159a636b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://x.com/SumitKumar70350" target="_blank" rel="noopener noreferrer">Twitter / X</a>
           </div>
         </div>
         <div className="footer-bottom">
-          <p>© 2026 [Agency Name]. All rights reserved.</p>
-          <p>Corporate website concepts, statements, and service descriptions are provided by [Agency Name] for institutional evaluation only.</p>
+          <p>© 2026 Infinium Studio. High-fidelity digital engineering for the modern enterprise.</p>
+          <div className="footer-legal">
+            <a href="#top">Privacy</a>
+            <a href="#top">Terms</a>
+            <a href="#top">Compliance</a>
+          </div>
         </div>
       </footer>
     </main>
