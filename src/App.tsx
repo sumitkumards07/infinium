@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, memo } from 'react'
 import type { CSSProperties, MouseEvent } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { Analytics } from '@vercel/analytics/react'
@@ -191,7 +191,7 @@ const faqs = [
   }
 ]
 
-function BeamsAndGrid() {
+const BeamsAndGrid = memo(function BeamsAndGrid() {
   return (
     <div className="beams-grid-bg" aria-hidden="true">
       {/* Rotated CSS Grid Pattern */}
@@ -213,7 +213,7 @@ function BeamsAndGrid() {
       <div className="beam-particle-burst burst-3"></div>
     </div>
   );
-}
+})
 
 function useRevealOnView() {
   useEffect(() => {
