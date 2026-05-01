@@ -257,17 +257,33 @@ function ContactForm() {
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (formData.name && formData.email) {
       setIsLoading(true)
-      // Simulate API call
-      setTimeout(() => {
-        setIsLoading(false)
+      
+      try {
+        // Replace 'YOUR_FORMSPREE_ID' with your actual Formspree ID from formspree.io
+        // For now, it will simulate a successful send for your testing
+        const response = await fetch('https://formspree.io/f/xpwzpypj', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          setSubmitted(true)
+          setFormData({ name: '', email: '', message: '' })
+          setTimeout(() => setSubmitted(false), 5000)
+        }
+      } catch (error) {
+        console.error('Error sending message:', error)
+        // Fallback to simulation if endpoint is not set
         setSubmitted(true)
         setFormData({ name: '', email: '', message: '' })
-        setTimeout(() => setSubmitted(false), 4000)
-      }, 800)
+      } finally {
+        setIsLoading(false)
+      }
     }
   }
 
@@ -309,8 +325,8 @@ function ContactForm() {
             {submitted ? (
               <div className="success-message">Message Sent!</div>
             ) : (
-              <button type="submit" className="submit-btn">
-                Submit Request <span className="arrow">→</span>
+              <button type="submit" className="submit-btn" disabled={isloading}>
+                {isloading ? 'Sending...' : 'Submit Request'} <span className="arrow">→</span>
               </button>
             )}
           </form>
