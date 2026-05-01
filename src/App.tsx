@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { CSSProperties, MouseEvent } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { Analytics } from '@vercel/analytics/react'
 import './App.css'
 import { Footer } from './Footer';
 
@@ -684,6 +685,7 @@ function App() {
   useRevealOnView()
   return (
     <main className="site-shell">
+      <Analytics />
       <section className="hero-section" id="top" aria-labelledby="hero-title">
         <nav className="navbar" aria-label="Primary navigation">
           <a className="brand" href="#top" aria-label="Infinium home">
