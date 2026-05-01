@@ -560,6 +560,7 @@ const caseStudiesData: CaseStudyProps[] = [
 
 function MagneticButton({ children, href, className }: { children: React.ReactNode; href: string; className: string }) {
   const ref = useRef<HTMLAnchorElement>(null);
+  const rectRef = useRef<DOMRect | null>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -567,11 +568,17 @@ function MagneticButton({ children, href, className }: { children: React.ReactNo
   const springX = useSpring(x, springConfig);
   const springY = useSpring(y, springConfig);
 
+  const handleMouseEnter = () => {
+    if (ref.current) {
+      rectRef.current = ref.current.getBoundingClientRect();
+    }
+  };
+
   const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+    if (!rectRef.current) return;
+    const { left, top, width, height } = rectRef.current;
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
     x.set((e.clientX - centerX) * 0.3);
     y.set((e.clientY - centerY) * 0.3);
   };
@@ -579,6 +586,7 @@ function MagneticButton({ children, href, className }: { children: React.ReactNo
   const handleMouseLeave = () => {
     x.set(0);
     y.set(0);
+    rectRef.current = null;
   };
 
   return (
@@ -586,6 +594,7 @@ function MagneticButton({ children, href, className }: { children: React.ReactNo
       ref={ref}
       href={href}
       className={className}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ x: springX, y: springY }}
@@ -605,7 +614,7 @@ function InfiniumLegacyHero() {
       <motion.div 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
         className="legacy-eyebrow"
       >
         <div className="line"></div>
@@ -615,9 +624,9 @@ function InfiniumLegacyHero() {
 
       {/* Main Headline: Mixing Sans-Serif with Serif for "Legacy" feel */}
       <motion.h1 
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
         className="legacy-headline"
       >
         Engineering your digital <br className="desktop-break"/>
@@ -626,19 +635,19 @@ function InfiniumLegacyHero() {
 
       {/* Subheadline: Clear value proposition */}
       <motion.p 
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
         className="legacy-subheadline"
       >
-        Infinium is the trusted technical partner for visionary founders. We architect scalable, high-performance platforms designed to dominate markets and outlast the competition.
+        Infinium Studio is the trusted technical partner for visionary founders. We architect scalable, high-performance platforms designed to dominate markets and outlast the competition.
       </motion.p>
 
       {/* High-Conversion CTA Area */}
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
         className="legacy-actions"
       >
         <MagneticButton className="legacy-btn" href="#pricing">
