@@ -123,13 +123,13 @@ const shopifyPortfolio = [
   {
     title: 'Evara',
     price: '₹8,999 /mo',
-    imageSrc: 'https://wsrv.nl/?url=raw.githubusercontent.com/sumitkumards07/infinium/main/public/evara.png&w=600&output=webp',
+    imageSrc: '/evara.png',
     websiteUrl: 'https://evara.me/',
   },
   {
     title: 'Shraddha Weaves',
     price: '₹1,999 /mo',
-    imageSrc: 'https://wsrv.nl/?url=raw.githubusercontent.com/sumitkumards07/infinium/main/public/evara.png&w=600&output=webp',
+    imageSrc: '/evara.png',
     websiteUrl: 'https://shraddhaweaves.com/',
   }
 ];
