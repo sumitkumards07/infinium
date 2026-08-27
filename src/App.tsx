@@ -708,6 +708,7 @@ function App() {
             Infinium
           </a>
           <div className="nav-links">
+            <a href="/shopify">Shopify</a>
             <a href="#services">Services</a>
             <a href="#work">Work</a>
             <a href="#about">About</a>
