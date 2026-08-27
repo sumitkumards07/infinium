@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { Analytics } from '@vercel/analytics/react'
 import './App.css'
 import { Footer } from './Footer';
+import { Link } from 'react-router-dom';
 
 const partnerMarks = [
   'Axis',
@@ -707,12 +708,27 @@ function App() {
             <span className="brand-mark" />
             Infinium
           </a>
-          <div className="nav-links">
-            <a href="/shopify">Shopify</a>
-            <a href="#services">Services</a>
-            <a href="#work">Work</a>
-            <a href="#about">About</a>
-            <a href="#contact">Legal</a>
+          <div className="nav-links flex items-center gap-6">
+            <div className="relative group">
+              <a href="#services" className="flex items-center gap-1 hover:text-teal-600 transition-colors">
+                Services
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:rotate-180">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </a>
+              <div className="absolute top-full left-0 mt-2 w-56 bg-white border border-slate-100 shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 flex flex-col p-2">
+                <Link to="/shopify" className="px-4 py-2.5 hover:bg-slate-50 text-sm font-medium text-slate-700 hover:text-teal-600 rounded-lg transition-colors flex items-center justify-between">
+                  Shopify Store Setup
+                  <span className="bg-teal-100 text-teal-700 text-[10px] px-2 py-0.5 rounded-full font-bold">NEW</span>
+                </Link>
+                <a href="#services" className="px-4 py-2.5 hover:bg-slate-50 text-sm font-medium text-slate-700 hover:text-teal-600 rounded-lg transition-colors">Web Systems</a>
+                <a href="#services" className="px-4 py-2.5 hover:bg-slate-50 text-sm font-medium text-slate-700 hover:text-teal-600 rounded-lg transition-colors">Mobile Platforms</a>
+                <a href="#services" className="px-4 py-2.5 hover:bg-slate-50 text-sm font-medium text-slate-700 hover:text-teal-600 rounded-lg transition-colors">AI Automation</a>
+              </div>
+            </div>
+            <a href="#work" className="hover:text-teal-600 transition-colors">Work</a>
+            <a href="#about" className="hover:text-teal-600 transition-colors">About</a>
+            <a href="#contact" className="hover:text-teal-600 transition-colors">Legal</a>
           </div>
           <a className="nav-cta" href="https://wa.me/918950013181" target="_blank" rel="noopener noreferrer">Book a Call</a>
         </nav>
