@@ -122,46 +122,49 @@ const pricingPlans = [
 const shopifyPortfolio = [
   {
     title: 'Evara',
-    imageSrc: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop',
+    imageSrc: '/evara.png',
     websiteUrl: 'https://evara.me/',
   },
   {
     title: 'Shraddha Weaves',
-    imageSrc: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1200&auto=format&fit=crop',
+    imageSrc: '/evara.png',
     websiteUrl: 'https://shraddhaweaves.com/',
   }
 ];
 
-function ShopifyCaseStudy({ title, imageSrc, websiteUrl, stackIndex = 0, totalCards = 1 }: any) {
-  const stickyTop = 80 + stackIndex * 50;
-  const scaleOffset = 1 - (totalCards - 1 - stackIndex) * 0.02;
+function ShopifyCaseStudy({ title, imageSrc, websiteUrl }: any) {
   return (
     <article
-      className="case-study-card reveal-on-view"
+      className="reveal-on-view"
       style={{
-        '--stack-index': stackIndex,
-        '--sticky-top': `${stickyTop}px`,
-        '--scale-offset': scaleOffset,
-      } as CSSProperties}
+        display: 'flex',
+        flexDirection: 'column',
+        borderRadius: '1rem',
+        overflow: 'hidden',
+        border: '1px solid rgba(0,0,0,0.1)',
+        backgroundColor: '#fff',
+        textDecoration: 'none',
+        color: 'inherit',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+        transition: 'transform 0.3s ease',
+      }}
+      onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
+      onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
     >
-      <div className="case-info">
-        <div className="case-info-left">
-          <h3 className="case-title">{title}</h3>
-        </div>
-        <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="case-view-link">
-          View Store <span className="arrow-icon">→</span>
-        </a>
-      </div>
-
-      <div className="case-visual" style={{ backgroundColor: '#f8fafc' }}>
+      <div style={{ height: '260px', overflow: 'hidden', backgroundColor: '#f8fafc', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
         <img 
           src={imageSrc} 
           alt={`${title} store`} 
-          className="case-img" 
           loading="lazy" 
           decoding="async"
-          style={{ objectFit: 'cover' }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
         />
+      </div>
+      <div style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 600 }}>{title}</h3>
+        <a href={websiteUrl} target="_blank" rel="noopener noreferrer" style={{ color: '#0d9488', fontWeight: 500, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+          View Store <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </article>
   )
@@ -295,9 +298,9 @@ export default function ShopifyLanding() {
           <h2 id="work-title">Featured Shopify Stores</h2>
         </div>
 
-        <div className="project-stack">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginTop: '3rem', maxWidth: '1000px', margin: '3rem auto 0 auto', padding: '0 1rem' }}>
           {shopifyPortfolio.map((caseStudy, index) => (
-            <ShopifyCaseStudy key={index} {...caseStudy} stackIndex={index} totalCards={shopifyPortfolio.length} />
+            <ShopifyCaseStudy key={index} {...caseStudy} />
           ))}
         </div>
       </section>
