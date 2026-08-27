@@ -122,17 +122,19 @@ const pricingPlans = [
 const shopifyPortfolio = [
   {
     title: 'Evara',
-    imageSrc: '/evara.png',
+    price: '₹8,999 /mo',
+    imageSrc: 'https://wsrv.nl/?url=raw.githubusercontent.com/sumitkumards07/infinium/main/public/evara.png&w=600&output=webp',
     websiteUrl: 'https://evara.me/',
   },
   {
     title: 'Shraddha Weaves',
-    imageSrc: '/evara.png',
+    price: '₹1,999 /mo',
+    imageSrc: 'https://wsrv.nl/?url=raw.githubusercontent.com/sumitkumards07/infinium/main/public/evara.png&w=600&output=webp',
     websiteUrl: 'https://shraddhaweaves.com/',
   }
 ];
 
-function ShopifyCaseStudy({ title, imageSrc, websiteUrl }: any) {
+function ShopifyCaseStudy({ title, price, imageSrc, websiteUrl }: any) {
   return (
     <article
       className="reveal-on-view"
@@ -161,7 +163,10 @@ function ShopifyCaseStudy({ title, imageSrc, websiteUrl }: any) {
         />
       </div>
       <div style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 600 }}>{title}</h3>
+        <div>
+          <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 600 }}>{title}</h3>
+          <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.9rem', color: '#64748b', fontWeight: 500 }}>{price}</p>
+        </div>
         <a href={websiteUrl} target="_blank" rel="noopener noreferrer" style={{ color: '#0d9488', fontWeight: 500, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
           View Store <span aria-hidden="true">↗</span>
         </a>
