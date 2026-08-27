@@ -203,23 +203,22 @@ export default function ShopifyLanding() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="max-w-5xl mx-auto mt-24 relative z-10 border-y border-white/10 bg-black/20 backdrop-blur-md overflow-x-auto [&::-webkit-scrollbar]:hidden"
-          style={{ scrollbarWidth: 'none' }}
+          className="max-w-5xl mx-auto mt-24 relative z-10 border-y border-white/10 bg-black/20 backdrop-blur-md"
         >
-          <div className="flex items-center min-w-max md:min-w-0 md:grid md:grid-cols-4 divide-x divide-white/10">
-            <div className="px-8 py-8 flex flex-col items-center justify-center min-w-[200px] md:min-w-0">
+          <div className="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-4 md:divide-x md:divide-white/10 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
+            <div className="snap-center shrink-0 w-[80%] md:w-auto px-8 py-8 flex flex-col items-center justify-center border-r border-white/10 md:border-r-0">
               <div className="text-4xl md:text-5xl font-black text-white mb-2">150+</div>
               <div className="text-xs md:text-sm text-zinc-400 font-medium uppercase tracking-widest text-center">Project<br/>Completed</div>
             </div>
-            <div className="px-8 py-8 flex flex-col items-center justify-center min-w-[200px] md:min-w-0">
+            <div className="snap-center shrink-0 w-[80%] md:w-auto px-8 py-8 flex flex-col items-center justify-center border-r border-white/10 md:border-r-0">
               <div className="text-4xl md:text-5xl font-black text-white mb-2">98%</div>
               <div className="text-xs md:text-sm text-zinc-400 font-medium uppercase tracking-widest text-center">Client<br/>Satisfaction</div>
             </div>
-            <div className="px-8 py-8 flex flex-col items-center justify-center min-w-[200px] md:min-w-0">
+            <div className="snap-center shrink-0 w-[80%] md:w-auto px-8 py-8 flex flex-col items-center justify-center border-r border-white/10 md:border-r-0">
               <div className="text-4xl md:text-5xl font-black text-white mb-2">5+</div>
               <div className="text-xs md:text-sm text-zinc-400 font-medium uppercase tracking-widest text-center">Years of<br/>Experience</div>
             </div>
-            <div className="px-8 py-8 flex flex-col items-center justify-center min-w-[200px] md:min-w-0">
+            <div className="snap-center shrink-0 w-[80%] md:w-auto px-8 py-8 flex flex-col items-center justify-center">
               <div className="text-4xl md:text-5xl font-black text-white mb-2">24/7</div>
               <div className="text-xs md:text-sm text-zinc-400 font-medium uppercase tracking-widest text-center">Support<br/>Available</div>
             </div>
