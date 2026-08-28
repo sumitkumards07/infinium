@@ -102,30 +102,30 @@ export default function ShopifyLanding() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-zinc-50 font-sans selection:bg-red-500/30 overflow-x-hidden">
+    <div className="min-h-screen bg-[#fdfdfc] text-slate-900 font-sans selection:bg-teal-500/30 overflow-x-hidden">
       
       {/* Navbar */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/70 backdrop-blur-xl border-b border-white/5 py-4' : 'bg-transparent py-6'}`}>
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/70 backdrop-blur-xl border-b border-slate-200 py-4' : 'bg-transparent py-6'}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold tracking-tight text-white flex items-center gap-3 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-500 to-red-700 shadow-lg shadow-red-500/20 flex items-center justify-center transition-transform group-hover:scale-105">
+          <Link to="/" className="text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-3 group">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-500 to-teal-700 shadow-lg shadow-teal-500/20 flex items-center justify-center transition-transform group-hover:scale-105">
               <span className="text-white font-black text-sm">I</span>
             </div>
             Infinium
           </Link>
           
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-            <Link to="/" className="hover:text-white transition-colors">Home</Link>
-            <a href="#pricing" className="text-white border-b border-red-500 pb-1">Shopify</a>
-            <a href="#work" className="hover:text-white transition-colors">Work</a>
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+            <Link to="/" className="hover:text-teal-600 transition-colors">Home</Link>
+            <a href="#pricing" className="text-teal-600 font-bold border-b border-teal-600 pb-1">Shopify</a>
+            <a href="#work" className="hover:text-teal-600 transition-colors">Work</a>
           </div>
           
           <a href="https://wa.me/918950013181" target="_blank" rel="noopener noreferrer" 
-             className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-red-600 hover:bg-red-500 text-white text-sm font-semibold rounded-full transition-all shadow-[0_0_20px_rgba(220,38,38,0.3)] hover:shadow-[0_0_30px_rgba(220,38,38,0.5)]">
+             className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-teal-600 hover:bg-teal-500 text-white text-sm font-semibold rounded-full transition-all shadow-[0_0_20px_rgba(13,148,136,0.3)] hover:shadow-[0_0_30px_rgba(13,148,136,0.5)]">
              Contact Sales <ArrowRight size={16} />
           </a>
 
-          <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button className="md:hidden text-slate-900" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -133,26 +133,26 @@ export default function ShopifyLanding() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:hidden">
-          <Link to="/" className="text-2xl font-bold text-zinc-400 hover:text-white transition-colors" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-          <a href="#pricing" className="text-2xl font-bold text-white" onClick={() => setMobileMenuOpen(false)}>Shopify</a>
-          <a href="#work" className="text-2xl font-bold text-zinc-400 hover:text-white transition-colors" onClick={() => setMobileMenuOpen(false)}>Work</a>
-          <a href="https://wa.me/918950013181" className="mt-8 px-8 py-4 bg-red-600 text-white rounded-full font-bold text-lg" onClick={() => setMobileMenuOpen(false)}>Contact Sales</a>
+        <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:hidden">
+          <Link to="/" className="text-2xl font-bold text-slate-600 hover:text-teal-600 transition-colors" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+          <a href="#pricing" className="text-2xl font-bold text-teal-600" onClick={() => setMobileMenuOpen(false)}>Shopify</a>
+          <a href="#work" className="text-2xl font-bold text-slate-600 hover:text-teal-600 transition-colors" onClick={() => setMobileMenuOpen(false)}>Work</a>
+          <a href="https://wa.me/918950013181" className="mt-8 px-8 py-4 bg-teal-600 text-white rounded-full font-bold text-lg" onClick={() => setMobileMenuOpen(false)}>Contact Sales</a>
         </div>
       )}
 
       {/* Hero Section */}
       <section className="relative pt-40 pb-20 md:pt-52 md:pb-32 px-6 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-red-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-teal-600/10 blur-[120px] rounded-full pointer-events-none"></div>
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none mix-blend-overlay"></div>
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-bold tracking-widest uppercase mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-100 border border-teal-200 text-teal-700 text-xs font-bold tracking-widest uppercase mb-8"
           >
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
             Shopify Store Setup
           </motion.div>
           
@@ -163,14 +163,14 @@ export default function ShopifyLanding() {
             className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 leading-[1.1]"
           >
             Build a Shopify Store <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400 italic font-serif font-light">that converts.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-500 italic font-serif font-light">that converts.</span>
           </motion.h1>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-12 leading-relaxed"
+            className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-12 leading-relaxed"
           >
             Professional Shopify websites designed, built, and maintained as a monthly service. From new businesses to established premium brands.
           </motion.p>
@@ -181,10 +181,10 @@ export default function ShopifyLanding() {
             transition={{ delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a href="#pricing" className="w-full sm:w-auto px-8 py-4 bg-white text-black hover:bg-zinc-200 font-bold rounded-full transition-all">
+            <a href="#pricing" className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white hover:bg-slate-800 font-bold rounded-full transition-all">
               View Plans
             </a>
-            <a href="#work" className="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 font-bold rounded-full transition-all">
+            <a href="#work" className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 border border-slate-200 text-slate-900 font-bold rounded-full transition-all shadow-sm">
               See our Work
             </a>
           </motion.div>
@@ -195,34 +195,34 @@ export default function ShopifyLanding() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="max-w-5xl mx-auto mt-24 relative z-10 border-y border-white/10 bg-black/20 backdrop-blur-md"
+          className="max-w-5xl mx-auto mt-24 relative z-10 border-y border-slate-200 bg-white/50 backdrop-blur-md"
         >
-          <div className="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-4 md:divide-x md:divide-white/10 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
-            <div className="snap-center shrink-0 w-[80%] md:w-auto px-8 py-8 flex flex-col items-center justify-center border-r border-white/10 md:border-r-0">
-              <div className="text-4xl md:text-5xl font-black text-white mb-2">150+</div>
-              <div className="text-xs md:text-sm text-zinc-400 font-medium uppercase tracking-widest text-center">Project<br/>Completed</div>
+          <div className="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-4 md:divide-x md:divide-slate-200 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
+            <div className="snap-center shrink-0 w-[80%] md:w-auto px-8 py-8 flex flex-col items-center justify-center border-r border-slate-200 md:border-r-0">
+              <div className="text-4xl md:text-5xl font-black text-slate-900 mb-2">150+</div>
+              <div className="text-xs md:text-sm text-slate-600 font-medium uppercase tracking-widest text-center">Project<br/>Completed</div>
             </div>
-            <div className="snap-center shrink-0 w-[80%] md:w-auto px-8 py-8 flex flex-col items-center justify-center border-r border-white/10 md:border-r-0">
-              <div className="text-4xl md:text-5xl font-black text-white mb-2">98%</div>
-              <div className="text-xs md:text-sm text-zinc-400 font-medium uppercase tracking-widest text-center">Client<br/>Satisfaction</div>
+            <div className="snap-center shrink-0 w-[80%] md:w-auto px-8 py-8 flex flex-col items-center justify-center border-r border-slate-200 md:border-r-0">
+              <div className="text-4xl md:text-5xl font-black text-slate-900 mb-2">98%</div>
+              <div className="text-xs md:text-sm text-slate-600 font-medium uppercase tracking-widest text-center">Client<br/>Satisfaction</div>
             </div>
-            <div className="snap-center shrink-0 w-[80%] md:w-auto px-8 py-8 flex flex-col items-center justify-center border-r border-white/10 md:border-r-0">
-              <div className="text-4xl md:text-5xl font-black text-white mb-2">5+</div>
-              <div className="text-xs md:text-sm text-zinc-400 font-medium uppercase tracking-widest text-center">Years of<br/>Experience</div>
+            <div className="snap-center shrink-0 w-[80%] md:w-auto px-8 py-8 flex flex-col items-center justify-center border-r border-slate-200 md:border-r-0">
+              <div className="text-4xl md:text-5xl font-black text-slate-900 mb-2">5+</div>
+              <div className="text-xs md:text-sm text-slate-600 font-medium uppercase tracking-widest text-center">Years of<br/>Experience</div>
             </div>
             <div className="snap-center shrink-0 w-[80%] md:w-auto px-8 py-8 flex flex-col items-center justify-center">
-              <div className="text-4xl md:text-5xl font-black text-white mb-2">24/7</div>
-              <div className="text-xs md:text-sm text-zinc-400 font-medium uppercase tracking-widest text-center">Support<br/>Available</div>
+              <div className="text-4xl md:text-5xl font-black text-slate-900 mb-2">24/7</div>
+              <div className="text-xs md:text-sm text-slate-600 font-medium uppercase tracking-widest text-center">Support<br/>Available</div>
             </div>
           </div>
         </motion.div>
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 px-6 bg-zinc-950 relative border-t border-white/5">
+      <section id="pricing" className="py-24 px-6 bg-slate-50 relative border-t border-slate-200">
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-sm font-bold text-red-500 tracking-widest uppercase mb-3">Monthly Plans</h2>
+            <h2 className="text-sm font-bold text-teal-600 tracking-widest uppercase mb-3">Monthly Plans</h2>
             <p className="text-4xl md:text-5xl font-bold tracking-tight">Simple, transparent pricing.</p>
           </div>
           
@@ -236,12 +236,12 @@ export default function ShopifyLanding() {
                 transition={{ delay: i * 0.1 }}
                 className={`relative p-8 rounded-3xl flex flex-col h-full transition-transform hover:-translate-y-2 ${
                   plan.popular 
-                    ? 'bg-gradient-to-b from-red-950/40 to-zinc-900 border border-red-500/30 shadow-2xl shadow-red-900/20' 
-                    : 'bg-zinc-900/50 border border-white/10 hover:border-white/20'
+                    ? 'bg-gradient-to-b from-teal-50 to-white border border-teal-200 shadow-xl shadow-teal-900/5' 
+                    : 'bg-white border border-slate-200 shadow-sm hover:border-slate-300 hover:shadow-md'
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-red-600 text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-lg shadow-red-600/30">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-teal-600 text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-lg shadow-teal-600/30">
                     Most Popular
                   </div>
                 )}
@@ -249,23 +249,23 @@ export default function ShopifyLanding() {
                 <div className="mb-8">
                   <div className="text-4xl mb-4">{plan.icon}</div>
                   <h3 className="text-2xl font-bold tracking-tight mb-2">{plan.title}</h3>
-                  <p className="text-sm text-zinc-400 min-h-[60px]">{plan.description}</p>
+                  <p className="text-sm text-slate-600 min-h-[60px]">{plan.description}</p>
                 </div>
                 
-                <div className="mb-8 p-4 rounded-2xl bg-black/40 border border-white/5">
-                  <div className="text-xs text-zinc-500 font-bold uppercase tracking-wider mb-1">Goal</div>
-                  <div className="text-sm font-medium text-red-400 mb-4">{plan.badge}</div>
-                  <div className="text-xs text-zinc-500 font-bold uppercase tracking-wider mb-1">Monthly</div>
+                <div className="mb-8 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                  <div className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Goal</div>
+                  <div className="text-sm font-medium text-teal-700 mb-4">{plan.badge}</div>
+                  <div className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Monthly</div>
                   <div className="flex items-baseline gap-1">
                     <span className="text-4xl font-black">{plan.price}</span>
-                    <span className="text-zinc-500">{plan.period}</span>
+                    <span className="text-slate-500">{plan.period}</span>
                   </div>
                 </div>
                 
                 <ul className="flex-1 space-y-4 mb-8">
                   {plan.features.map((feat, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-sm text-zinc-300">
-                      <Check className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+                    <li key={idx} className="flex items-start gap-3 text-sm text-slate-700">
+                      <Check className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -277,8 +277,8 @@ export default function ShopifyLanding() {
                   rel="noopener noreferrer"
                   className={`w-full py-4 text-center font-bold rounded-xl transition-all ${
                     plan.popular 
-                      ? 'bg-red-600 hover:bg-red-500 text-white shadow-lg shadow-red-600/20' 
-                      : 'bg-white hover:bg-zinc-200 text-black'
+                      ? 'bg-teal-600 hover:bg-teal-500 text-white shadow-lg shadow-teal-600/20' 
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-900'
                   }`}
                 >
                   {plan.cta}
@@ -287,7 +287,7 @@ export default function ShopifyLanding() {
                 {plan.exampleUrl && (
                   <div className="mt-6 text-center">
                     <a href={plan.exampleUrl} target="_blank" rel="noopener noreferrer" 
-                       className="inline-flex items-center gap-1.5 text-sm text-red-400 hover:text-red-300 font-medium transition-colors">
+                       className="inline-flex items-center gap-1.5 text-sm text-teal-600 hover:text-teal-500 font-medium transition-colors">
                       View Live Example: {plan.exampleLabel} <ExternalLink size={14} />
                     </a>
                   </div>
@@ -299,10 +299,10 @@ export default function ShopifyLanding() {
       </section>
 
       {/* Portfolio Section */}
-      <section id="work" className="py-24 px-6 bg-[#050505] relative border-t border-white/5">
+      <section id="work" className="py-24 px-6 bg-white relative border-t border-slate-200">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-sm font-bold text-red-500 tracking-widest uppercase mb-3">Our Work</h2>
+            <h2 className="text-sm font-bold text-teal-600 tracking-widest uppercase mb-3">Our Work</h2>
             <p className="text-4xl md:text-5xl font-bold tracking-tight">Featured Shopify Stores</p>
           </div>
           
@@ -317,10 +317,10 @@ export default function ShopifyLanding() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ delay: i * 0.1 }}
-                className="group relative block rounded-3xl overflow-hidden border border-white/10 bg-zinc-900/50"
+                className="group relative block rounded-3xl overflow-hidden border border-slate-200 bg-slate-50"
               >
-                <div className="aspect-[4/3] overflow-hidden bg-zinc-800">
-                  <div className="w-full h-full bg-zinc-900 flex items-center justify-center">
+                <div className="aspect-[4/3] overflow-hidden bg-slate-200">
+                  <div className="w-full h-full bg-slate-100 flex items-center justify-center">
                     {/* Placeholder for the image. Assuming images exist in public/ or user updates them later */}
                     <img 
                       src={item.imageSrc} 
@@ -328,16 +328,16 @@ export default function ShopifyLanding() {
                       className="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
-                        e.currentTarget.parentElement!.innerHTML = '<div class="text-zinc-600 font-bold">Image Preview</div>';
+                        e.currentTarget.parentElement!.innerHTML = '<div class="text-slate-400 font-bold">Image Preview</div>';
                       }}
                     />
                   </div>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-                <div className="absolute bottom-0 left-0 w-full p-8 flex justify-between items-end">
+                <div className="absolute bottom-0 left-0 w-full p-8 flex justify-between items-end text-white">
                   <div>
                     <h3 className="text-2xl font-bold mb-1">{item.title}</h3>
-                    <p className="text-red-400 font-medium">{item.price}</p>
+                    <p className="text-teal-400 font-medium">{item.price}</p>
                   </div>
                   <div className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-xl">
                     <ExternalLink size={20} />
@@ -350,51 +350,51 @@ export default function ShopifyLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black py-20 px-6 border-t border-white/10">
+      <footer className="bg-slate-50 py-20 px-6 border-t border-slate-200">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
             <div className="col-span-2 md:col-span-1">
-              <Link to="/" className="text-xl font-bold tracking-tight text-white flex items-center gap-2 mb-6">
-                <div className="w-6 h-6 rounded-md bg-red-600"></div>
+              <Link to="/" className="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-2 mb-6">
+                <div className="w-6 h-6 rounded-md bg-teal-600"></div>
                 Infinium
               </Link>
-              <p className="text-zinc-500 text-sm">High-fidelity digital engineering for the modern enterprise.</p>
+              <p className="text-slate-500 text-sm">High-fidelity digital engineering for the modern enterprise.</p>
             </div>
             
             <div>
-              <h4 className="font-bold mb-6 text-white">Solutions</h4>
-              <ul className="space-y-4 text-sm text-zinc-400">
-                <li><Link to="/#services" className="hover:text-red-400 transition-colors">Web Systems</Link></li>
-                <li><Link to="/#services" className="hover:text-red-400 transition-colors">Mobile Platforms</Link></li>
-                <li><Link to="/#services" className="hover:text-red-400 transition-colors">AI Automation</Link></li>
-                <li><a href="#pricing" className="hover:text-red-400 transition-colors text-red-500">Shopify Setup</a></li>
+              <h4 className="font-bold mb-6 text-slate-900">Solutions</h4>
+              <ul className="space-y-4 text-sm text-slate-600">
+                <li><Link to="/#services" className="hover:text-teal-600 transition-colors">Web Systems</Link></li>
+                <li><Link to="/#services" className="hover:text-teal-600 transition-colors">Mobile Platforms</Link></li>
+                <li><Link to="/#services" className="hover:text-teal-600 transition-colors">AI Automation</Link></li>
+                <li><a href="#pricing" className="hover:text-teal-600 transition-colors text-teal-600">Shopify</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-bold mb-6 text-white">Expertise</h4>
-              <ul className="space-y-4 text-sm text-zinc-400">
-                <li><a href="#work" className="hover:text-red-400 transition-colors">Case Studies</a></li>
-                <li><Link to="/#services" className="hover:text-red-400 transition-colors">Product Design</Link></li>
-                <li><a href="#pricing" className="hover:text-red-400 transition-colors">Institutional Plans</a></li>
+              <h4 className="font-bold mb-6 text-slate-900">Expertise</h4>
+              <ul className="space-y-4 text-sm text-slate-600">
+                <li><a href="#work" className="hover:text-teal-600 transition-colors">Case Studies</a></li>
+                <li><Link to="/#services" className="hover:text-teal-600 transition-colors">Product Design</Link></li>
+                <li><a href="#pricing" className="hover:text-teal-600 transition-colors">Institutional Plans</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-bold mb-6 text-white">Engage</h4>
-              <ul className="space-y-4 text-sm text-zinc-400">
-                <li><a href="https://wa.me/918950013181" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors">Start a Project</a></li>
-                <li><a href="mailto:sumitkumards07@gmail.com" className="hover:text-red-400 transition-colors">Direct Email</a></li>
-                <li><a href="https://x.com/SumitKumar70350" target="_blank" rel="noopener noreferrer" className="hover:text-red-400 transition-colors">Twitter / X</a></li>
+              <h4 className="font-bold mb-6 text-slate-900">Engage</h4>
+              <ul className="space-y-4 text-sm text-slate-600">
+                <li><a href="https://wa.me/918950013181" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600 transition-colors">Start a Project</a></li>
+                <li><a href="mailto:sumitkumards07@gmail.com" className="hover:text-teal-600 transition-colors">Direct Email</a></li>
+                <li><a href="https://x.com/SumitKumar70350" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600 transition-colors">Twitter / X</a></li>
               </ul>
             </div>
           </div>
           
-          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-500">
+          <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
             <p>© 2026 Infinium Studio. All rights reserved.</p>
             <div className="flex gap-6">
-              <a href="#" className="hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
+              <a href="#" className="hover:text-slate-900 transition-colors">Privacy</a>
+              <a href="#" className="hover:text-slate-900 transition-colors">Terms</a>
             </div>
           </div>
         </div>
