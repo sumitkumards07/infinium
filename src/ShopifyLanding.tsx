@@ -13,8 +13,6 @@ const pricingPlans = [
     cta: 'START MY STORE',
     icon: '🟢',
     popular: false,
-    exampleUrl: 'https://shraddhaweaves.com/',
-    exampleLabel: 'Shraddha Weaves',
     features: [
       'Shopify store setup',
       'Professional responsive design',
@@ -88,12 +86,6 @@ const shopifyPortfolio = [
     price: '₹8,999 /mo',
     imageSrc: '/evara.png',
     websiteUrl: 'https://evara.me/',
-  },
-  {
-    title: 'Shraddha Weaves',
-    price: '₹1,999 /mo',
-    imageSrc: '/evara.png',
-    websiteUrl: 'https://shraddhaweaves.com/',
   }
 ];
 
