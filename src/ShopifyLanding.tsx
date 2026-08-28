@@ -115,7 +115,9 @@ export default function ShopifyLanding() {
           </Link>
           
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+            <Link to="/" className="hover:text-white transition-colors">Home</Link>
             <a href="#pricing" className="text-white border-b border-red-500 pb-1">Shopify</a>
+            <a href="#work" className="hover:text-white transition-colors">Work</a>
           </div>
           
           <a href="https://wa.me/918950013181" target="_blank" rel="noopener noreferrer" 
@@ -132,7 +134,9 @@ export default function ShopifyLanding() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:hidden">
+          <Link to="/" className="text-2xl font-bold text-zinc-400 hover:text-white transition-colors" onClick={() => setMobileMenuOpen(false)}>Home</Link>
           <a href="#pricing" className="text-2xl font-bold text-white" onClick={() => setMobileMenuOpen(false)}>Shopify</a>
+          <a href="#work" className="text-2xl font-bold text-zinc-400 hover:text-white transition-colors" onClick={() => setMobileMenuOpen(false)}>Work</a>
           <a href="https://wa.me/918950013181" className="mt-8 px-8 py-4 bg-red-600 text-white rounded-full font-bold text-lg" onClick={() => setMobileMenuOpen(false)}>Contact Sales</a>
         </div>
       )}

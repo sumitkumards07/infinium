@@ -711,7 +711,11 @@ function App() {
           <div className="nav-links flex items-center gap-6">
             <Link to="/shopify" className="hover:text-teal-600 transition-colors flex items-center gap-2">
               Shopify
+              <span className="bg-teal-100 text-teal-700 text-[10px] px-2 py-0.5 rounded-full font-bold">NEW</span>
             </Link>
+            <a href="#work" className="hover:text-teal-600 transition-colors">Work</a>
+            <a href="#about" className="hover:text-teal-600 transition-colors">About</a>
+            <a href="#contact" className="hover:text-teal-600 transition-colors">Legal</a>
           </div>
           <a className="nav-cta" href="https://wa.me/918950013181" target="_blank" rel="noopener noreferrer">Book a Call</a>
         </nav>
